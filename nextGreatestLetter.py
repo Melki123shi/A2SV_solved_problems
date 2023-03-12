@@ -14,7 +14,6 @@ class Solution:
                     return letters[m]
                 e = m
             if e == s+1:
-                
                 if letters[e] > target and letters[s]>target:
                     return letters[s]
                 elif letters[e] > target:
