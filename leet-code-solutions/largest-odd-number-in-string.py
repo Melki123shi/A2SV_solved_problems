@@ -1,7 +1,7 @@
 class Solution:
     def largestOddNumber(self, num: str) -> str:
-        while int(num[-1]) % 2 == 0:
-            num = num[:-1]
-            if num == '':
-                return ""
-        return num
+        i = len(num) - 1
+        while i > -1 and int(num[i]) % 2 == 0:
+            i -= 1
+            
+        return num[:i+1]
