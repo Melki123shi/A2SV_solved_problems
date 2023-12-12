@@ -1,7 +1,7 @@
 class OrderedStream:
 
     def __init__(self, n: int):
-        self.stream = ['' for _ in range(n)]
+        self.stream = defaultdict(str)
         self.n = n - 1
         self.ptr = 0
 
