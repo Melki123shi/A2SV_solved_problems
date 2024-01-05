@@ -1,14 +1,25 @@
 class Solution:
     def lengthOfLongestSubstring(self, s: str) -> int:
-        l = 0
-        unique = {}
+        unique = set()
         res = 0
+        size = 0
+        left = 0
 
-        for r in range(len(s)):
-            char = s[r]
-            if char in unique and unique[char] >= l:
-                l = unique[char] + 1
-            res = max(res, (r - l + 1))
-            unique[char] = r
+        for right in range(len(s)):
+            if s[right] not in unique:
+                size += 1
+            else:
+                temp = s[right]
+                while s[left] != temp:
+                    unique.remove(s[left])
+                    left += 1
+                left += 1
+                size = right - left + 1
+
+            unique.add(s[right])
+            res = max(res, size)
+            # print(unique, res)
+        
         return res
-                
+
+        
