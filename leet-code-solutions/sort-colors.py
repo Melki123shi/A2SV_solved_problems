@@ -3,16 +3,16 @@ class Solution:
         """
         Do not return anything, modify nums in-place instead.
         """
-        i = 0
-        j = len(nums) - 1
-        k = 0
+        zeros = 0
+        ones = 0
+        for num in nums:
+            if num == 0:
+                zeros += 1
+            elif num == 1:
+                ones += 1
+        twos = len(nums) - (ones + zeros)
+        nums[:zeros] = [0 for _ in range(zeros)]
+        nums[zeros:zeros + ones] = [1 for _ in range(ones)]
+        nums[zeros + ones:] = [2 for _ in range(twos)]
 
-        while k <= j:
-            if nums[k] == 0:
-                nums[i], nums[k] = nums[k], nums[i]
-                i += 1
-            elif nums[k] == 2:
-                nums[j], nums[k] = nums[k], nums[j]
-                j -= 1
-                k -= 1
-            k += 1
+        
