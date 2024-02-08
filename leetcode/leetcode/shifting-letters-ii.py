@@ -12,10 +12,8 @@ class Solution:
                 prefix_sum[start] += 1
                 prefix_sum[end + 1] -= 1
 
-        total = 0
-        for ind in range(len(prefix_sum)):
-            total += prefix_sum[ind]
-            prefix_sum[ind] = total
+        for ind in range(1, len(prefix_sum)):
+            prefix_sum[ind] += prefix_sum[ind - 1]
             
         # Iterate through the prefix_sum to update the characters in the string
         for i in range(len(prefix_sum) - 1):
