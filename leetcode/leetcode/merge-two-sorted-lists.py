@@ -5,27 +5,30 @@
 #         self.next = next
 class Solution:
     def mergeTwoLists(self, list1: Optional[ListNode], list2: Optional[ListNode]) -> Optional[ListNode]:
-        head = ListNode()
-        list3 = head
-        while list1 and list2:
-            if list1.val < list2.val:
-                print(1)
+        def recursion(list1, list2, list3 = ListNode()):
+            if not list1 and not list2:
+                return None
+            
+            if not list1 and list2:
+                list3.next = list2
+                list2 = list2.next
+            elif not list2 and list1:
+                list3.next = list1
+                list1 = list1.next
+            elif list1.val < list2.val:
                 list3.next = list1
                 list1 = list1.next
             else:
                 list3.next = list2
                 list2 = list2.next
             list3 = list3.next
-        
-        while list1:
-            list3.next = list1
-            list1 = list1.next
-            list3 = list3.next
 
-        while list2:
-            list3.next = list2
-            list2 = list2.next
-            list3 = list3.next
+            recursion(list1, list2, list3)
+            return list3
         
-        return head.next
-                
+        result = recursion(list1, list2)
+        return result
+
+    
+
+                    
