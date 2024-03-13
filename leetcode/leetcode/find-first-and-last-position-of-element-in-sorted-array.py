@@ -1,33 +1,43 @@
 class Solution:
     def searchRange(self, nums: List[int], target: int) -> List[int]:
-        def findFirst(nums, target):
-            left, right = 0, len(nums) - 1
-            first = -1
-            while left <= right:
-                mid = left + (right - left) // 2
-                if nums[mid] == target:
-                    first = mid
-                    right = mid - 1
-                elif nums[mid] < target:
-                    left = mid + 1
-                else:
-                    right = mid - 1
-            return first
+        start = float('inf')
+        end = float('inf')
+
+        if len(nums) == 0:
+            return [-1, -1]
+
+        if nums[0] == target:
+            start = 0
         
-        def findLast(nums, target):
-            left, right = 0, len(nums) - 1
-            last = -1
-            while left <= right:
-                mid = left + (right - left) // 2
-                if nums[mid] == target:
-                    last = mid
-                    left = mid + 1
-                elif nums[mid] < target:
-                    left = mid + 1
+        else:
+            l = 1
+            r = len(nums) - 1
+            while l <= r:
+                mid = (l + r)//2
+                if nums[mid - 1] != target and nums[mid] == target:
+                    start = mid
+                    break
+                if nums[mid] >= target:
+                    r = mid - 1
                 else:
-                    right = mid - 1
-            return last
+                    l = mid + 1
         
-        first = findFirst(nums, target)
-        last = findLast(nums, target)
-        return [first, last]
+        if nums[len(nums) - 1] == target:
+            end = len(nums) - 1
+        else:
+            l = 0
+            r = len(nums) - 2
+
+            while l <= r:
+                mid = (l + r)//2
+                if nums[mid + 1] != target and nums[mid] == target:
+                    end = mid
+                    break
+                if nums[mid] <= target:
+                    l = mid + 1
+                else:
+                    r = mid - 1
+        if type(start) == float or type(end) == float:
+            return [-1,-1]
+        return [start,end]
+        
